@@ -133,7 +133,7 @@ MonoBehaviour:
       m_Action: Rotate
       m_Flags: 8
     m_Flags: 0
-  vertThrust: 1000
+  vertThrust: 1500
   rotatePower: 150
   engineSoundClip: {fileID: 8300000, guid: 8a690c3cbc4d5f1488cb739cb548f872, type: 3}
 --- !u!54 &1184234864819972822
@@ -407,7 +407,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadDelay: 3
-  audioClips: []
+  audioClips:
+  - {fileID: 8300000, guid: 0211e376d6bd066448f4b8d0616f0573, type: 3}
+  - {fileID: 8300000, guid: 1fad437b87804b147b4e865529510315, type: 3}
 --- !u!1001 &4343994443231298679
 PrefabInstance:
   m_ObjectHideFlags: 0

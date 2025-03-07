@@ -10,6 +10,8 @@ public class CollisionHandler : MonoBehaviour
 
     AudioSource audioSource;
 
+    bool isControllable = true;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -17,6 +19,8 @@ public class CollisionHandler : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        if(!isControllable) { return; }
+
         switch (other.gameObject.tag)
         {
             case "Fuel":
@@ -38,14 +42,18 @@ public class CollisionHandler : MonoBehaviour
 
     void StartCrashSequence()
     {
-        audioSource.PlayOneShot(audioClips[1]); // Success
+        isControllable = false;
+        audioSource.Stop();
+        audioSource.PlayOneShot(audioClips[0]); // Crash
         GetComponent<RocketMovement>().enabled = false;
         Invoke("ReloadLevel", loadDelay);
     }
 
     void LandingSquence()
     {
-        audioSource.PlayOneShot(audioClips[0]); // Crash
+        isControllable = false;
+        audioSource.Stop();
+        audioSource.PlayOneShot(audioClips[1]); // Success
         GetComponent<RocketMovement>().enabled = false;
         Invoke("LoadNextLevel", loadDelay);
     }
