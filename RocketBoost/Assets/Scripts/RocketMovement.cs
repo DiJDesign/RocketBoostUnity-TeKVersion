@@ -9,6 +9,7 @@ public class RocketMovement : MonoBehaviour
     [SerializeField] float vertThrust = 1000.0f;
     [SerializeField] float rotatePower = 500.0f;
     [SerializeField] AudioClip engineSoundClip;
+    [SerializeField] ParticleSystem[] boosterParticles;
 
     Rigidbody rb;
     AudioSource audioSource;
@@ -39,16 +40,31 @@ public class RocketMovement : MonoBehaviour
     {
         if (thrust.IsPressed())
         {
-            rb.AddRelativeForce(0.0f, vertThrust * Time.fixedDeltaTime, 0.0f);
-            if(!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(engineSoundClip);
-            }
+            StartThrusting();
         }
         else
         {
-            audioSource.Stop();
+            StopThrusting();
         }
+    }
+
+    void StartThrusting()
+    {
+        rb.AddRelativeForce(0.0f, vertThrust * Time.fixedDeltaTime, 0.0f);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(engineSoundClip);
+        }
+        if (!boosterParticles[0].isPlaying)
+        {
+            boosterParticles[0].Play();
+        }
+    }
+
+    void StopThrusting()
+    {
+        audioSource.Stop();
+        boosterParticles[0].Stop();
     }
 
     void ProcessRotate()
@@ -57,11 +73,17 @@ public class RocketMovement : MonoBehaviour
 
         if(rotationInput > 0.0f)
         {
+            PlayLeftBoosterParticles();
             ApplyRotation(-rotatePower);
         }
         else if(rotationInput < 0.0f)
         {
+            PlayRightBoosterParticles();
             ApplyRotation(rotatePower);
+        }
+        else
+        {
+            StopSideBoostParticles();
         }
     }
 
@@ -70,5 +92,29 @@ public class RocketMovement : MonoBehaviour
         rb.freezeRotation = true; // PhysicsSystemを止まる
         transform.Rotate(0.0f, 0.0f, rotateDir * Time.deltaTime);
         rb.freezeRotation = false;
+    }
+
+    void PlayRightBoosterParticles()
+    {
+        if (!boosterParticles[2].isPlaying)
+        {
+            boosterParticles[1].Stop();
+            boosterParticles[2].Play();
+        }
+    }
+
+    void PlayLeftBoosterParticles()
+    {
+        if (!boosterParticles[1].isPlaying)
+        {
+            boosterParticles[2].Stop();
+            boosterParticles[1].Play();
+        }
+    } 
+
+       void StopSideBoostParticles()
+    {
+        boosterParticles[1].Stop();
+        boosterParticles[2].Stop();
     }
 }

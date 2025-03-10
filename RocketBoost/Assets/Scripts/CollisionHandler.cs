@@ -1,16 +1,19 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] float loadDelay = 3.0f;
     [SerializeField] AudioClip[] audioClips;
+    [SerializeField] ParticleSystem[] particleSystems;
 
     AudioSource audioSource;
 
     bool isControllable = true;
+    bool isCollidable = true;
 
     void Start()
     {
@@ -19,7 +22,7 @@ public class CollisionHandler : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if(!isControllable) { return; }
+        if(!isControllable || !isCollidable) { return; }
 
         switch (other.gameObject.tag)
         {
@@ -40,11 +43,38 @@ public class CollisionHandler : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        RespondToDebugKeys();
+    }
+
+    void RespondToDebugKeys()
+    {
+        if(Keyboard.current.lKey.wasPressedThisFrame)
+        {
+            Debug.Log("次のレベルをデバッグとして読み込んだ。");
+            LoadNextLevel();
+        }
+        else if(Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            isCollidable = !isCollidable;
+            if(!isCollidable)
+            {
+                Debug.Log("衝突は無効にした。");
+            }
+            else
+            {
+                Debug.Log("衝突は有効にした。");
+            }
+        }
+    }
+
     void StartCrashSequence()
     {
         isControllable = false;
         audioSource.Stop();
         audioSource.PlayOneShot(audioClips[0]); // Crash
+        particleSystems[0].Play();
         GetComponent<RocketMovement>().enabled = false;
         Invoke("ReloadLevel", loadDelay);
     }
@@ -54,6 +84,7 @@ public class CollisionHandler : MonoBehaviour
         isControllable = false;
         audioSource.Stop();
         audioSource.PlayOneShot(audioClips[1]); // Success
+        particleSystems[1].Play();
         GetComponent<RocketMovement>().enabled = false;
         Invoke("LoadNextLevel", loadDelay);
     }
