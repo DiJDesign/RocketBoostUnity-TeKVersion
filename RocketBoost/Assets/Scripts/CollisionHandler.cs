@@ -81,6 +81,7 @@ public class CollisionHandler : MonoBehaviour
 
     void LandingSquence()
     {
+        Debug.Log("着陸した。");
         isControllable = false;
         audioSource.Stop();
         audioSource.PlayOneShot(audioClips[1]); // Success
