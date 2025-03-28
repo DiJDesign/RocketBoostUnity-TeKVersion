@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e88a7855308ee114ab610957fbfd261a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.072142
+      value: 2.09
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e88a7855308ee114ab610957fbfd261a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.04
+      value: -2.91
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e88a7855308ee114ab610957fbfd261a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40.57
+      value: 40.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e88a7855308ee114ab610957fbfd261a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -81,6 +81,10 @@ PrefabInstance:
       value: 452.99097
       objectReference: {fileID: 0}
     - target: {fileID: 5666311496741519685, guid: e88a7855308ee114ab610957fbfd261a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 5666311496741519685, guid: e88a7855308ee114ab610957fbfd261a, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
@@ -94,6 +98,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1692001119793474449, guid: e88a7855308ee114ab610957fbfd261a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7722149761394445020}
+    - targetCorrespondingSourceObject: {fileID: 1692001119793474449, guid: e88a7855308ee114ab610957fbfd261a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1283789299806509186}
   m_SourcePrefab: {fileID: 100100000, guid: e88a7855308ee114ab610957fbfd261a, type: 3}
 --- !u!1 &5287475657388577820 stripped
 GameObject:
@@ -113,7 +120,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -141,7 +148,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -151,3 +158,18 @@ CapsuleCollider:
   m_Height: 0.022162369
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.0006811244}
+--- !u!114 &1283789299806509186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8813700420793952037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca21e6676e7a554497c39d383225d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 3
+  height: 3.5
+  speed: 10
